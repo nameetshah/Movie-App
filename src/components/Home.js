@@ -8,6 +8,7 @@ import Thumb from "./Thumb";
 import Spinner from "./Spinner";
 import SearchBar from "./SearchBar";
 import LoadButton from "./LoadButton";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Home = () => {
     const {state, loading, error, setSearchTerm, searchTerm, setIsLoadingMore} = useHomeFetch();
@@ -28,10 +29,11 @@ const Home = () => {
         <SearchBar setSearchTerm={setSearchTerm}/>
                 {/*: null*/}
             {/*}*/}
+            <InfiniteScroll next={() => setIsLoadingMore(true)} hasMore={true} loader={<Spinner/>} dataLength={state.results} scrollThreshold='200px'>
             <div>
-
             <Grid header={searchTerm ? 'Search Result' : 'Popular Movies'}>
                 {state.results.map(movie => (
+                    <>
                     <Thumb
                         key={movie.id}
                         clickable
@@ -41,14 +43,17 @@ const Home = () => {
                                 : NoImage
                         }
                         movieId={movie.id}
+                        movieName={movie.original_title}
                     />
+                    </>
                 ))}
             </Grid>
             </div>
-            {loading && <Spinner/>}
-            {state.page < state.total_pages && !loading && (
-                <LoadButton text='Load More' callback={() => setIsLoadingMore(true)} />
-            )}
+            </InfiniteScroll>
+            {/*{loading &&  <Spinner/>}*/}
+            {/*{state.page < state.total_pages && !loading && (*/}
+            {/*    <LoadButton text='Load More' callback={() => setIsLoadingMore(true)} />*/}
+            {/*)}*/}
         </>
     )
 }
