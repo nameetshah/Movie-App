@@ -1,0 +1,13 @@
+.csssss {
+    justify-content: center;
+    text-align: center;
+    padding: 122px 5px 0;
+    text-decoration-line: none;
+    opacity: 1;
+}
+
+@media screen and (min-height: 768px){
+    h3 {
+        font-size: 0.9rem;
+    }
+}

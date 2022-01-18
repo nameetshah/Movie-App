@@ -1,5 +1,5 @@
 import React from "react";
-import {POSTER_SIZE, BACKDROP_SIZE, IMAGE_BASE_URL} from "../config";
+import {IMAGE_BASE_URL} from "../config";
 import NoImage from '../images/no_image.jpg';
 import {useHomeFetch} from "../hooks/useHomeFetch";
 import HeroImage from "./HeroImage";
@@ -15,16 +15,18 @@ const Home = () => {
     console.log('State...', state);
 
     if (error) {
-        return <div>Something went wrong...!!</div>
+        return <div style={{fontSize: 50, textAlign: 'center', alignItems: 'center', fontWeight: 'bold', color: 'red'}}>
+            Something went wrong...!!
+            </div>
     }
 
     return (
         <>
             {/*{state.results[1] ?*/}
                 <HeroImage
-                    image={`${IMAGE_BASE_URL}${state.results[1]?.poster_path}`}
-                    title={state.results[1]?.original_title}
-                    text={state.results[1]?.overview}
+                    image={`${IMAGE_BASE_URL}${state.results[0]?.poster_path}`}
+                    title={state.results[0]?.original_title}
+                    text={state.results[0]?.overview}
                 />
         <SearchBar setSearchTerm={setSearchTerm}/>
                 {/*: null*/}
@@ -33,9 +35,9 @@ const Home = () => {
             <div>
             <Grid header={searchTerm ? 'Search Result' : 'Popular Movies'}>
                 {state.results.map(movie => (
-                    <>
+                    <div key={movie.id}>
                     <Thumb
-                        key={movie.id}
+                        // key={movie.id}
                         clickable
                         image={
                             movie.poster_path
@@ -45,7 +47,7 @@ const Home = () => {
                         movieId={movie.id}
                         movieName={movie.original_title}
                     />
-                    </>
+                    </div>
                 ))}
             </Grid>
             </div>

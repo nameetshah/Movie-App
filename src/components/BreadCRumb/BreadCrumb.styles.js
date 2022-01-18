@@ -8,13 +8,14 @@ export const Wrapper = styled.div`
   height: 40px;
   background: var(--medGrey);
   color: var(--white);
-  
+  //text-decoration-line: underline;
 `;
 
 export const Content = styled.div`
   display: flex;
   width: 100%;
   max-width: var(--maxWidth);
+  //text-decoration-line: underline;
   //padding: 0 20px;
   
   span {
